@@ -15,7 +15,7 @@ public class zero1 {
             for(int w = 0 ; w <= capacity ; w++){
                 if(i == 0 || w == 0)
                     V[i][w] = 0;
-                else if(weight[i-1] <= w){
+                else if(weight[i-1] <= w){ //Dont forgot the w is here
                     V[i][w] = Math.max(V[i-1][w] , V[i-1][w -weight[i-1]] + profit[i-1]);
                 } else {
                     V[i][w] = V[i-1][w];

@@ -8,7 +8,7 @@ public class quicksortCode{
     }
 
     static void quicksort(int[] arr , int low , int high){
-        if(low > high) return;
+        if(low > high) return;  //dont forgot the terminating condition
         int start = low;
         int end = high;
         int pivot = (low + high)/2;

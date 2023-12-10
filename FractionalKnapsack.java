@@ -1,31 +1,33 @@
 import java.util.Arrays;
 import java.util.Comparator;
+
 class Item {
     int weight;
     int value;
-    Item(int _weight , int _value){
+
+    Item(int _weight, int _value) {
         this.weight = _weight;
         this.value = _value;
     }
 }
 
-public class FractionalKnapsack  {
-    
+public class FractionalKnapsack {
 
-    public static double fractionalknapsack(Item[] items , int capacity){
-        // Arrays.sort(items, java.util.Comparator.comparingDouble(item -> (double)items.value/items.weight).reversed());publ
+    public static double fractionalKnapsack(Item[] items, int capacity) {
         Arrays.sort(items, Comparator.comparingDouble((Item item) -> (double) item.value / item.weight).reversed());
+        //Dont forgot Profit/weight
+        //leftover/item.weight * item.profit
 
+        double totalProfit = 0.0;
+        double currentWeight = 0.0;
 
-        double totalProfit  = 0.0;
-        double currentWeigth = 0.0;
-        for(Item item : items){
-            if(currentWeigth + item.weight <= capacity){
-                currentWeigth += item.weight;
+        for (Item item : items) {
+            if (currentWeight + item.weight <= capacity) {
+                currentWeight += item.weight;
                 totalProfit += item.value;
-            }else{
-                double remaingWeight = capacity - currentWeigth;
-                totalProfit  = totalProfit + (double) remaingWeight /item.weight *item.value;
+            } else {
+                double remainingCapacity = capacity - currentWeight;
+                totalProfit += ((double) remainingCapacity / item.weight) * item.value;
                 break;
             }
         }
@@ -35,16 +37,16 @@ public class FractionalKnapsack  {
 
     public static void main(String[] args) {
         Item[] items = {
-            new Item(10,60),
-            new Item(20,100),
-            new Item(30,120),
-            
+                new Item(2, 10),
+                new Item(3, 15),
+                new Item(5, 25),
+                new Item(6, 30),
+                new Item(18, 36),
+                new Item(8, 40),
         };
 
-        int capacity = 50;
-        double maxValue = fractionalknapsack(items,capacity);
-        System.out.println("maximum profit : " + maxValue);
+        int capacity = 14;
+        double maxValue = fractionalKnapsack(items, capacity);
+        System.out.println("Maximum profit: " + maxValue);
     }
 }
-
-
